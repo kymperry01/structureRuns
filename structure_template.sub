@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#SBATCH --job-name="jobname" # Job name
+#SBATCH -p cpu                                      # partition (this is the queue your job will be added to) 
+#SBATCH -N 1                                            # number of nodes (due to the nature of sequential processing, here uses single node)
+#SBATCH -n 1                                           # number of cores (here uses 2)
+#SBATCH --time=72:00:00                                 # time allocation, which has the format (D-HH:MM), set to 72 hours (max)
+#SBATCH --mem=2GB                                     # memory pool for all cores (here set to 50 GB)
+#SBATCH --mail-type=FAIL                                # send mail at JOB FAIL
+#SBATCH --mail-type=END                                 # send mail at JOB END
+#SBATCH --mail-user=kym.perry@adelaide.edu.au           # email address
+
+
+# This job's working directory
+echo Working directory is $SLURM_SUBMIT_DIR
+echo Running on host `hostname`
+echo Time is `date`
+
+# Load module(s) if required:
+module load structure/2.3.4
+
+# Run the executables
+cd /fast/users/a1058885/structure;
+structure -m mainparams -e extraparams -i infile -o outfile;
+
+
+
+
+
+
